@@ -63,29 +63,3 @@ $("#submit").on("click", function(event) {
   $("#firstTrain-input").val("");
   $("#frequency-input").val("");
 });
-
-// push the value to store in firebase
-
-// database.ref().on("child_added", function(childSnapshot) {
-//   var sv = childSnapshot.val();
-//   console.log(sv.trainName);
-//   console.log(sv.firstTrain);
-//   console.log(sv.destination);
-//   console.log(sv.frequency);
-
-//   // change the HTML to reflect the value
-//   $("#trainList").append(
-//     "<tr><td class='trainName'>" +
-//       sv.trainName +
-//       "</td><td class='destination'>" +
-//       sv.destination +
-//       "</td><td class='firstTrain'" +
-//       sv.firstTrain +
-//       "</td><td class='frequency'>" +
-//       sv.frequency +
-//       "</td>"
-//   ),
-//     function(errorObject) {
-//       console.log("Errrors handled: " + errorObject.code);
-//     };
-// });
