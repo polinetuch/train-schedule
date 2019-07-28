@@ -13,3 +13,33 @@ firebase.initializeApp(firebaseConfig);
 
 // create a variable to reference the database
 var database = firebase.database();
+
+// initial values
+var firstTrain = "";
+var destination = "";
+var frequency = "";
+var nextArrival = "";
+var minuteAway = "";
+
+// capture button click
+$("#submit").on("click", function(event) {
+  event.preventDefault();
+
+  // grabbed the values from text-boxes
+  firstTrain = $("#train-input")
+    .val()
+    .trim();
+  destination = $("#destination-input")
+    .val()
+    .trim();
+  frequency = $("#frequency-input")
+    .val()
+    .trim();
+
+  // push the value to store in firebase
+  database.ref().push({
+    firstTrain: firstTrain,
+    destination: destination,
+    frequency: frequency
+  });
+});
