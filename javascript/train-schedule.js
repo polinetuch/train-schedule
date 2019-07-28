@@ -14,32 +14,78 @@ firebase.initializeApp(firebaseConfig);
 // create a variable to reference the database
 var database = firebase.database();
 
-// initial values
-var firstTrain = "";
-var destination = "";
-var frequency = "";
-var nextArrival = "";
-var minuteAway = "";
+// // initial values
+// var trainName = "";
+// var destination = "";
+// var firstTrain = "";
+// var frequency = "";
+// var nextArrival = "";
+// var minuteAway = "";
 
-// capture button click
+// button for adding train information
 $("#submit").on("click", function(event) {
   event.preventDefault();
 
-  // grabbed the values from text-boxes
-  firstTrain = $("#train-input")
+  // grabbed the user input
+  var trainName = $("#train-input")
     .val()
     .trim();
-  destination = $("#destination-input")
+  var destinationTr = $("#destination-input")
     .val()
     .trim();
-  frequency = $("#frequency-input")
+  var firstTrain = $("#firstTrain-input")
     .val()
     .trim();
+  var frequency = $("#frequency-input")
+    .val()
+    .trim();
+  var newTrainInfo = {
+    name: trainName,
+    first: firstTrain,
+    destination: destinationTr,
+    time: frequency
+  };
 
-  // push the value to store in firebase
-  database.ref().push({
-    firstTrain: firstTrain,
-    destination: destination,
-    frequency: frequency
-  });
+  // upload the train data to the database
+  database.ref().push(newTrainInfo);
+
+  // log all the information to console
+  console.log(newTrainInfo.name);
+  console.log(newTrainInfo.first);
+  console.log(newTrainInfo.destination);
+  console.log(newTrainInfo.time);
+
+  alert("New Train Information Successfully Added");
+
+  // Clear all of the text-boxed
+  $("#train-input").val("");
+  $("#destination-input").val("");
+  $("#firstTrain-input").val("");
+  $("#frequency-input").val("");
 });
+
+// push the value to store in firebase
+
+// database.ref().on("child_added", function(childSnapshot) {
+//   var sv = childSnapshot.val();
+//   console.log(sv.trainName);
+//   console.log(sv.firstTrain);
+//   console.log(sv.destination);
+//   console.log(sv.frequency);
+
+//   // change the HTML to reflect the value
+//   $("#trainList").append(
+//     "<tr><td class='trainName'>" +
+//       sv.trainName +
+//       "</td><td class='destination'>" +
+//       sv.destination +
+//       "</td><td class='firstTrain'" +
+//       sv.firstTrain +
+//       "</td><td class='frequency'>" +
+//       sv.frequency +
+//       "</td>"
+//   ),
+//     function(errorObject) {
+//       console.log("Errrors handled: " + errorObject.code);
+//     };
+// });
