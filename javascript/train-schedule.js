@@ -41,7 +41,7 @@ $("#submit").on("click", function(event) {
     .trim();
   var newTrainInfo = {
     name: trainName,
-    first: firstTrain,
+    firstTrain: firstTrain,
     destination: destinationTr,
     time: frequency
   };
@@ -62,4 +62,32 @@ $("#submit").on("click", function(event) {
   $("#destination-input").val("");
   $("#firstTrain-input").val("");
   $("#frequency-input").val("");
+});
+
+// create firebase event for adding train information to the database
+// and a row in the html when user click submit
+database.ref().on("child_added", function(childSnapshot) {
+  console.log(childSnapshot.val());
+
+  // variable to store the information
+  var trainName = childSnapshot.val().name;
+  var destinationTr = childSnapshot.val().destination;
+  var firstTrain = childSnapshot.val().firstTrain;
+  var frequency = childSnapshot.val().frequency;
+
+  console.log(trainName);
+  console.log(destinationTr);
+  console.log(firstTrain);
+  console.log(frequency);
+
+  // create new row to store the new information added by user
+  var newRow = $("<tr>").append(
+    $("<td>").text(trainName),
+    $("<td>").text(destinationTr),
+    $("<td>").text(firstTrain),
+    $("<td>").text(frequency)
+  );
+
+  // append the new row to the table
+  $("#trainList").append(newRow);
 });
