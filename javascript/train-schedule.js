@@ -103,9 +103,15 @@ database.ref().on("child_added", function(childSnapshot) {
     $("<td>").text(destination),
     $("<td>").text(frequency),
     $("<td>").text(nextTrainTime),
-    $("<td>").text(tMinutesTillTrain)
+    $("<td>").text(tMinutesTillTrain),
+    refreshTimeAndMinute()
   );
 
   // append the new row to the table
   $("#trainList").append(newRow);
+
+  function refreshTimeAndMinute() {
+    x = 60;
+    setTimeout(refreshTimeAndMinute, 60000);
+  }
 });
